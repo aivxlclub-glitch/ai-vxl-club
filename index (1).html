@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI VXL Club | بناء المستقبل</title>
+    <meta name="description" content="AI VXL Club هي مبادرة تعليمية أردنية يقوم فيها طلاب الجامعات بتدريس طلاب المدارس مهارات الذكاء الاصطناعي والبرمجة." />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #06b6d4;
+            --accent: #3b82f6;
+            --blue: #2563eb;
+            --cyan: #06b6d4;
+            --light-bg: #f0f4ff;
+            --dark-bg: #0a1f44;
+            --white: #ffffff;
+            --gray: #64748b;
+            --navy: #0a1f44;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(37, 99, 235, 0.15);
+            --gradient: linear-gradient(135deg, #0a1f44, #1e3a8a, #2563eb, #06b6d4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', 'Space Grotesk', sans-serif;
+            background: var(--light-bg);
+            color: var(--navy);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.03em; line-height: 1.2; }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+        /* ===== PRELOADER ===== */
+        .preloader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--light-bg);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .preloader.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-logo img {
+            height: 120px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* ===== STICKY HEADER ===== */
+        .sticky-header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.4s ease;
+            padding: 10px 0;
+        }
+
+        .sticky-header.scrolled {
+            box-shadow: 0 10px 40px rgba(10, 31, 68, 0.1);
+            background: rgba(255, 255, 255, 0);
+            padding: 5px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 90%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            height: 60px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 8px 0;
+            transition: all 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--navy);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger {
+            width: 28px; height: 20px;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background: var(--navy);
+            transition: all 0.3s;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--navy);
+            color: white;
+            box-shadow: 0 10px 30px rgba(10, 31, 68, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(10, 31, 68, 0.4);
+            background: var(--blue);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--blue);
+            color: var(--blue);
+        }
+
+        .btn-outline:hover {
+            background: var(--blue);
+            color: white;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        /* ===== SECTION DIVIDER (الخط الرفيع الفاصل) ===== */
+        .section-divider {
+            width: 120px;
+            height: 2px;
+            background: var(--gradient);
+            border-radius: 10px;
+            margin: 0 auto;
+        }
+
+        /* ===== HERO ===== */
+        #hero {
+            min-height: 100vh;
+            padding: 160px 0 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: 
+                radial-gradient(circle at 15% 20%, rgba(37, 99, 235, 0.1), transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(6, 182, 212, 0.1), transparent 40%),
+                var(--light-bg);
+        }
+
+        /* ===== خلفية تكنولوجية (خلايا) ===== */
+        #hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            from { background-position: 0 0; }
+            to { background-position: 100px 100px; }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ===== الشعار في دائرة تكنولوجية ===== */
+        .hero-logo-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(10, 31, 68, 0.1);
+            position: relative;
+        }
+
+        /* خلية تكنولوجية حول الشعار */
+        .hero-logo-circle::before {
+            content: '';
+            position: absolute;
+            inset: -15px;
+            border-radius: 50%;
+            border: 2px dashed rgba(37, 99, 235, 0.4);
+            animation: spin 20s linear infinite;
+        }
+
+        .hero-logo-circle::after {
+            content: '';
+            position: absolute;
+            inset: -30px;
+            border-radius: 50%;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            animation: spin 30s linear infinite reverse;
+        }
+
+        .hero-logo-circle img {
+            width: 130px;
+            height: auto;
+            object-fit: contain;
+            z-index: 2;
+        }
+
+        /* نقاط تكنولوجية حول الشعار */
+        .tech-dots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            inset: -40px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .tech-dots span {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary);
+            animation: pulseDot 2s infinite;
+        }
+
+        .tech-dots span:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+        .tech-dots span:nth-child(2) { top: 30%; right: 10%; animation-delay: 0.3s; }
+        .tech-dots span:nth-child(3) { bottom: 20%; right: 30%; animation-delay: 0.6s; }
+        .tech-dots span:nth-child(4) { bottom: 10%; left: 30%; animation-delay: 0.9s; }
+        .tech-dots span:nth-child(5) { top: 50%; left: 5%; animation-delay: 1.2s; }
+
+        @keyframes pulseDot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+            font-weight: 700;
+            color: var(--blue);
+            font-size: 0.9rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .hero-badge .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--cyan);
+            position: relative;
+        }
+
+        .hero-badge .dot::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--cyan);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(2); opacity: 0; }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            color: var(--navy);
+            line-height: 1.3;
+            margin-top: 20px;
+        }
+
+        .hero-title .highlight {
+            color: var(--blue);
+            font-weight: 900;
+        }
+
+        .hero-title .gradient-text {
+            background: var(--gradient);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-quote {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero-quote strong {
+            color: var(--navy);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        /* ===== SECTIONS (مع فراغ كبير) ===== */
+        section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-center {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--blue);
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--navy);
+            margin-bottom: 20px;
+        }
+
+        .lead {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 750px;
+            margin: 0 auto 50px;
+        }
+
+        /* ===== CARDS ===== */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(37, 99, 235, 0.3);
+            box-shadow: 0 20px 60px rgba(10, 31, 68, 0.15);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 25px;
+            border-radius: 20px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        .card-icon svg {
+            width: 35px;
+            height: 35px;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--navy);
+        }
+
+        .card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* ===== TOOLS ===== */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .tool-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 35px;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s;
+        }
+
+        .tool-card:hover {
+            border-color: rgba(37, 99, 235, 0.3);
+            box-shadow: 0 20px 60px rgba(10, 31, 68, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .tool-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        .tool-icon svg {
+            width: 35px;
+            height: 35px;
+        }
+
+        .tool-card h3 {
+            margin-bottom: 10px;
+            color: var(--navy);
+        }
+
+        .tool-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ===== JOIN FORM ===== */
+        .join-form-section {
+            padding: 120px 0;
+            text-align: center;
+        }
+
+        .join-form-section .container {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            padding: 60px;
+            backdrop-filter: blur(30px);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .join-form-section h2 {
+            color: var(--navy);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--navy);
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            background: white;
+            color: var(--navy);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--blue);
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--gray);
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            color: var(--navy);
+            background: white;
+        }
+
+        .form-submit {
+            width: 100%;
+            background: var(--navy);
+            color: white;
+            font-weight: 800;
+            padding: 16px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 10px 30px rgba(10, 31, 68, 0.3);
+            transition: all 0.3s;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(10, 31, 68, 0.5);
+            background: var(--blue);
+        }
+
+        /* ===== PARTNER ===== */
+        .partner-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .partner-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px 30px;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s;
+        }
+
+        .partner-card:hover {
+            border-color: rgba(37, 99, 235, 0.3);
+            box-shadow: 0 20px 60px rgba(10, 31, 68, 0.15);
+            transform: translateY(-8px);
+        }
+
+        .partner-card-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .partner-card-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke: var(--blue);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .partner-card h3 {
+            margin-bottom: 15px;
+            color: var(--navy);
+        }
+
+        .partner-card p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 60px 0;
+            background: var(--dark-bg);
+            color: white;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            text-align: right;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 900;
+            font-size: 1.3rem;
+            color: white;
+        }
+
+        .footer-logo img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .contact-item svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--cyan);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .cards, .tools-grid, .partner-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 280px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 100px 30px 30px;
+                box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1);
+                transition: all 0.5s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .cards, .tools-grid, .partner-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .join-form-section .container {
+                padding: 30px;
+            }
+        }
+
+        /* ===== REVEAL ON SCROLL (بديل AOS) ===== */
+        [data-aos] { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+        [data-aos="zoom-in"] { transform: scale(.92); }
+        [data-aos].is-visible { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) {
+            [data-aos] { opacity: 1 !important; transform: none !important; transition: none !important; }
+            html { scroll-behavior: auto; }
+        }
+        :focus-visible { outline: 3px solid var(--secondary); outline-offset: 3px; }
+
+        /* ===== FORM STATE ===== */
+        .form-note { font-size: .9rem; color: var(--gray); margin-bottom: 22px; }
+        .form-submit[disabled] { opacity: .6; cursor: not-allowed; }
+        .form-status { margin-top: 18px; padding: 16px 18px; border-radius: 14px; font-weight: 600; display: none; line-height: 1.6; }
+        .form-status.show { display: block; }
+        .form-status.ok { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+        .form-status.err { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+        .field-error { color: #b91c1c; font-size: .85rem; margin-top: 6px; display: none; }
+        .field-error.show { display: block; }
+
+        /* ===== ADMIN DASHBOARD ===== */
+        .admin-view {
+            display: none; position: fixed; inset: 0; z-index: 5000;
+            background: var(--light-bg); overflow-y: auto; padding: 24px 0 60px;
+        }
+        .admin-view.open { display: block; }
+        body.admin-open { overflow: hidden; }
+        .admin-bar {
+            display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between;
+            background: var(--navy); color: #fff; padding: 16px 22px; border-radius: 18px; margin-bottom: 24px;
+        }
+        .admin-bar h2 { font-size: 1.25rem; color: #fff; margin: 0; }
+        .admin-bar .muted { color: #9fb3d9; font-size: .85rem; font-weight: 500; }
+        .admin-btn {
+            background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.25);
+            padding: 9px 18px; border-radius: 40px; font-weight: 700; font-size: .85rem; cursor: pointer;
+            font-family: inherit; transition: background .2s;
+        }
+        .admin-btn:hover { background: rgba(255,255,255,.24); }
+        .admin-btn.solid { background: var(--secondary); border-color: var(--secondary); color: #04303a; }
+        .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 22px; }
+        .stat-box { background: #fff; border: 1px solid var(--glass-border); border-radius: 16px; padding: 18px; }
+        .stat-box .num { font-size: 2rem; font-weight: 800; color: var(--primary); font-family: 'Space Grotesk', sans-serif; }
+        .stat-box .lbl { font-size: .85rem; color: var(--gray); font-weight: 600; }
+        .admin-tools { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
+        .admin-tools input, .admin-tools select {
+            padding: 12px 16px; border: 1px solid var(--glass-border); border-radius: 12px;
+            font-family: inherit; font-size: .9rem; background: #fff; color: var(--navy);
+        }
+        .admin-tools input { flex: 1 1 240px; }
+        .table-wrap { background: #fff; border: 1px solid var(--glass-border); border-radius: 18px; overflow-x: auto; }
+        table.reg-table { width: 100%; border-collapse: collapse; font-size: .9rem; min-width: 900px; }
+        table.reg-table th {
+            text-align: right; padding: 14px 16px; background: #f8fafc; color: var(--gray);
+            font-weight: 700; font-size: .78rem; border-bottom: 1px solid var(--glass-border); white-space: nowrap;
+        }
+        table.reg-table td { padding: 14px 16px; border-bottom: 1px solid #eef2f9; vertical-align: top; }
+        table.reg-table tr:last-child td { border-bottom: none; }
+        table.reg-table tr:hover td { background: #fafcff; }
+        .tag { display: inline-block; padding: 4px 12px; border-radius: 30px; font-size: .75rem; font-weight: 700; background: #e0edff; color: #1e40af; white-space: nowrap; }
+        .tag.p { background: #e0fbff; color: #0e7490; }
+        .tag.t { background: #ede9fe; color: #5b21b6; }
+        .tag.d { background: #fef3c7; color: #92400e; }
+        .row-del { background: none; border: none; color: #b91c1c; cursor: pointer; font-size: .82rem; font-weight: 700; font-family: inherit; }
+        .empty-state { padding: 60px 20px; text-align: center; color: var(--gray); }
+        .gate { max-width: 420px; margin: 8vh auto; background: #fff; border: 1px solid var(--glass-border); border-radius: 22px; padding: 36px; }
+        .gate h3 { margin-bottom: 8px; }
+        .gate p { color: var(--gray); font-size: .9rem; margin-bottom: 20px; }
+        .gate input { width: 100%; padding: 14px 16px; border: 1px solid var(--glass-border); border-radius: 12px; font-family: inherit; margin-bottom: 14px; }
+        .gate button { width: 100%; padding: 14px; border: none; border-radius: 12px; background: var(--navy); color: #fff; font-weight: 800; font-family: inherit; cursor: pointer; }
+        .gate .err { color: #b91c1c; font-size: .85rem; margin-top: 12px; display: none; }
+        .gate .err.show { display: block; }
+        .admin-link { background: none; border: none; color: inherit; font: inherit; cursor: pointer; opacity: .65; }
+        @media (max-width: 768px) {
+            .admin-bar { flex-direction: column; align-items: stretch; text-align: center; }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- PRELOADER -->
+<div class="preloader">
+    <div class="loader-logo">
+        <img src="Ai_VXL_club_Logo_-removebg-preview.png" />
+    </div>
+</div>
+
+<!-- STICKY HEADER -->
+<header class="sticky-header">
+    <nav>
+      <a href="#" class="logo">
+    <img src="Ai_VXL_club_Logo_-removebg-preview.png"
+         alt="AI VXL Club Logo"
+         class="logo-img" />
+</a>
+
+        <div class="menu-toggle">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#about" class="nav-link">من نحن</a></li>
+                                                <li><a href="#join" class="nav-link">انضم معنا</a></li>
+            <li><a href="#partner" class="nav-link">كن شريكاً</a></li>
+        </ul>
+
+        <a href="#join" class="btn btn-primary">انضم إلينا</a>
+    </nav>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+    <div class="container">
+        <div class="hero-content" data-aos="fade-up">
+            <!-- الشعار داخل دائرة تكنولوجية -->
+            <div class="hero-logo-circle" data-aos="zoom-in">
+                <div class="tech-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <img src="Ai_VXL_club_Logo_-removebg-preview.png" />
+            </div>
+
+            <!-- البادج -->
+            <div class="hero-badge" data-aos="fade-up" data-aos-delay="100">
+                <span class="dot"></span>
+                مبادرة تعليمية أردنية (EdTech)
+            </div>
+
+            <!-- الجملة الرئيسية -->
+            <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+                طلاب الجامعة 
+                <span class="highlight">يشاركون</span> 
+                طلاب المدارس 
+                <span class="gradient-text">مهارات الذكاء الاصطناعي</span>
+                والتفكير الابتكاري
+            </h1>
+
+            <!-- جملة "ينقلون" -->
+            <div class="hero-quote" data-aos="fade-up" data-aos-delay="300">
+                <strong>ينقلون</strong> خبراتهم ومعارفهم للطلاب بطريقة عملية وممتعة.
+            </div>
+
+            <!-- جملة "يمكّنون" -->
+            <div class="hero-quote" data-aos="fade-up" data-aos-delay="400">
+                <strong>يمكّنون</strong> الطلاب من مهارات المستقبل.
+            </div>
+
+            <!-- الأزرار -->
+            <div class="hero-actions" data-aos="fade-up" data-aos-delay="500">
+                <a href="#about" class="btn btn-primary">اكتشف المبادرة</a>
+                <a href="#join" class="btn btn-outline">انضم كمتطوع</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== فاصل ===== -->
+<div class="container">
+    <div class="section-divider" data-aos="fade-up"></div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="container section-center">
+        <div class="section-label" data-aos="fade-up">01 — من نحن</div>
+        <h2 data-aos="fade-up">ما هو <span class="gradient-text">AI VXL Club</span>؟</h2>
+        <p class="lead" data-aos="fade-up">
+            AI VXL Club هي مبادرة تعليمية أردنية تهدف إلى سد الفجوة المعرفية بين المدرسة والجامعة. يقوم طلاب الجامعات المتطوعون بتدريس طلاب المدارس مهارات الذكاء الاصطناعي والبرمجة والتفكير الابتكاري داخل أندية مدرسية.
+        </p>
+
+        <div class="cards">
+            <div class="card" data-aos="fade-up" data-aos-delay="0">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="4"/>
+                        <circle cx="12" cy="12" r="4"/>
+                        <path d="M12 5v3M12 16v3M5 12h3M16 12h3"/>
+                    </svg>
+                </div>
+                <h3>طلاب الجامعة يدرّسون</h3>
+                <p>يقوم طلاب الجامعات المتطوعون بتدريس طلاب المدارس مهارات الذكاء الاصطناعي والبرمجة.</p>
+            </div>
+
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M12 7v5l3 3"/>
+                    </svg>
+                </div>
+                <h3>بيئة مدرسية معتادة</h3>
+                <p>أذكياء في استخدام الموارد — نستفيد من المتاح بذكاء، ونصمم نموذجاً مرناً قابلاً للتوسع.</p>
+            </div>
+
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 17l6-7 4 4 8-9"/>
+                        <path d="M17 5h4v4"/>
+                        <path d="M3 21h18"/>
+                    </svg>
+                </div>
+                <h3>من المدرسة إلى الجامعة</h3>
+                <p>نعد الطلاب لمواكبة متطلبات الجامعة وسوق العمل في عصر الذكاء الاصطناعي.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== فاصل ===== -->
+<div class="container">
+    <div class="section-divider" data-aos="fade-up"></div>
+</div>
+
+<!-- TOOLS -->
+<section style="background: white;">
+    <div class="container section-center">
+        <div class="section-label" data-aos="fade-up">02 — توظيف ما هو موجود أصلاً</div>
+        <h2 data-aos="fade-up">أذكياء في استخدام الموارد، <span class="gradient-text">جاهزون للتوسع</span></h2>
+        <p class="lead" data-aos="fade-up">نستفيد من المتاح بذكاء اليوم، ونصمم برامجنا لتكون قابلة للارتقاء مع أي تجهيزات أو تقنيات حديثة يقدمها شركاؤنا في المستقبل.</p>
+
+        <div class="tools-grid">
+            <div class="tool-card" data-aos="fade-up" data-aos-delay="0">
+                <div class="tool-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="4"/>
+                        <rect x="9" y="9" width="6" height="6"/>
+                    </svg>
+                </div>
+                <h3>استخدام ذكي للموارد</h3>
+                <p>نوظف البنية التحتية المدرسية الحالية بكفاءة عالية.</p>
+            </div>
+
+            <div class="tool-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="tool-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 3L2 21h20L12 3z"/>
+                    </svg>
+                </div>
+                <h3>جاهزون للشراكات التقنية</h3>
+                <p>نرحب بأي تقنيات أو معدات حديثة يقدمها شركاؤنا لتعزيز تجربة التعلم.</p>
+            </div>
+
+            <div class="tool-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="tool-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 3v12M8 11l4 4 4-4"/>
+                        <path d="M4 19h16"/>
+                    </svg>
+                </div>
+                <h3>نموذج مرن وقابل للتوسع</h3>
+                <p>نصمم برامجنا لتستفيد من أحدث التقنيات مع نمو المبادرة.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== فاصل ===== -->
+<div class="container">
+    <div class="section-divider" data-aos="fade-up"></div>
+</div>
+
+<!-- JOIN FORM -->
+<section id="join" class="join-form-section">
+    <div class="container">
+        <h2 data-aos="fade-up">انضم معنا</h2>
+        
+        <div class="form-wrapper" data-aos="fade-up">
+            <p class="form-note">املأ البيانات التالية وسنتواصل معك خلال أيام. البيانات تُحفظ في قاعدة بيانات النادي ولا تُشارك مع أي جهة خارجية.</p>
+
+            <form id="joinForm" novalidate>
+                <div class="form-group">
+                    <label for="f-name">الاسم الكامل</label>
+                    <input type="text" id="f-name" name="fullName" placeholder="اكتب اسمك هنا" required autocomplete="name">
+                    <div class="field-error" data-for="f-name">هذا الحقل مطلوب</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="f-email">البريد الإلكتروني</label>
+                    <input type="email" id="f-email" name="email" placeholder="example@email.com" required autocomplete="email">
+                    <div class="field-error" data-for="f-email">أدخل بريداً إلكترونياً صحيحاً</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="f-phone">رقم الهاتف / واتساب</label>
+                    <input type="tel" id="f-phone" name="phone" placeholder="07xxxxxxxx" required autocomplete="tel" inputmode="tel">
+                    <div class="field-error" data-for="f-phone">أدخل رقم هاتف صحيح (10 أرقام تبدأ بـ 07)</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="f-city">المدينة / المحافظة</label>
+                    <select id="f-city" name="city">
+                        <option value="">اختر المدينة</option>
+                        <option>عمّان</option><option>الزرقاء</option><option>إربد</option><option>البلقاء</option>
+                        <option>المفرق</option><option>الكرك</option><option>مأدبا</option><option>جرش</option>
+                        <option>عجلون</option><option>الطفيلة</option><option>معان</option><option>العقبة</option>
+                        <option>خارج الأردن</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="f-org">الجامعة / المؤسسة</label>
+                    <input type="text" id="f-org" name="organization" placeholder="اسم الجامعة أو المؤسسة">
+                </div>
+
+                <div class="form-group">
+                    <label for="f-major">التخصص / المجال</label>
+                    <input type="text" id="f-major" name="major" placeholder="مثال: علوم الحاسوب، هندسة، ذكاء اصطناعي...">
+                </div>
+
+                <div class="form-group">
+                    <label for="f-type">نوع الانضمام</label>
+                    <select id="f-type" name="joinType" required>
+                        <option value="">اختر نوع الانضمام</option>
+                        <option value="متطوع (طالب جامعي)">متطوع (طالب جامعي)</option>
+                        <option value="شريك (مدرسة / مؤسسة)">شريك (مدرسة / مؤسسة)</option>
+                        <option value="شريك تقني (شركة تكنولوجيا)">شريك تقني (شركة تكنولوجيا)</option>
+                        <option value="داعم (جهة مانحة / راعي)">داعم (جهة مانحة / راعي)</option>
+                    </select>
+                    <div class="field-error" data-for="f-type">اختر نوع الانضمام</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="f-msg">لماذا تريد الانضمام؟ (اختياري)</label>
+                    <textarea id="f-msg" name="message" rows="4" placeholder="اكتب رسالة قصيرة..."></textarea>
+                </div>
+
+                <!-- مصيدة السبام: مخفية عن المستخدم -->
+                <input type="text" name="website" id="f-hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
+
+                <button type="submit" class="form-submit" id="submitBtn">إرسال الطلب</button>
+                <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ===== فاصل ===== -->
+<div class="container">
+    <div class="section-divider" data-aos="fade-up"></div>
+</div>
+
+<!-- PARTNER -->
+<section id="partner">
+    <div class="container section-center">
+        <div class="section-label" data-aos="fade-up">03 — كن شريكًا معنا</div>
+        <h2 data-aos="fade-up">شاركنا بناء <span class="gradient-text">مستقبل التعليم</span></h2>
+        <p class="lead" data-aos="fade-up">
+            هل أنت مدرسة، مؤسسة تعليمية، أو شركة تكنولوجيا؟ ندعوك لتكون شريكاً معنا في تمكين الطلاب من مهارات الذكاء الاصطناعي.
+        </p>
+
+        <div class="partner-cards">
+            <div class="partner-card" data-aos="fade-up" data-aos-delay="0">
+                <div class="partner-card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 3L2 21h20L12 3z"/>
+                    </svg>
+                </div>
+                <h3>المدارس</h3>
+                <p>استضف نادي AI VXL في مدرستك وامنح طلابك فرصة تعلم مهارات المستقبل.</p>
+            </div>
+
+            <div class="partner-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="partner-card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M5 21c0-4 3-7 7-7s7 3 7 7"/>
+                    </svg>
+                </div>
+                <h3>شركات التكنولوجيا</h3>
+                <p>ادعم المبادرة بالتجهيزات أو البرمجيات أو الخبرة التقنية، وساعدنا على التوسع.</p>
+            </div>
+
+            <div class="partner-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="partner-card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 8l4 4-4 4-4-4 4-4z"/>
+                        <circle cx="12" cy="12" r="9"/>
+                    </svg>
+                </div>
+                <h3>المؤسسات التعليمية</h3>
+                <p>شارك في تطوير المناهج وتقديم الدعم الفني واللوجستي للمبادرة.</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 50px;" data-aos="fade-up">
+            <a href="#join" class="btn btn-primary" style="font-size: 1rem; padding: 16px 40px;">سجل كشريك معنا →</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===== لوحة إدارة المنتسبين ===== -->
+<div class="admin-view" id="adminView" aria-hidden="true">
+    <div class="container">
+
+        <div id="adminGate" class="gate">
+            <h3>لوحة إدارة المنتسبين</h3>
+            <p>هذه الصفحة مخصصة لفريق AI VXL Club. أدخل كلمة مرور الإدارة للمتابعة.</p>
+            <input type="password" id="adminKey" placeholder="كلمة مرور الإدارة" autocomplete="current-password">
+            <button id="adminLogin">دخول</button>
+            <div class="err" id="gateErr">كلمة المرور غير صحيحة</div>
+            <div style="text-align:center;margin-top:18px;">
+                <button class="admin-link" id="gateClose">رجوع إلى الموقع</button>
+            </div>
+        </div>
+
+        <div id="adminPanel" style="display:none;">
+            <div class="admin-bar">
+                <div>
+                    <h2>المنتسبون</h2>
+                    <div class="muted" id="lastSync">—</div>
+                </div>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                    <button class="admin-btn" id="btnRefresh">تحديث</button>
+                    <button class="admin-btn solid" id="btnExport">تصدير Excel / CSV</button>
+                    <button class="admin-btn" id="btnClose">إغلاق</button>
+                </div>
+            </div>
+
+            <div class="stats-row" id="statsRow"></div>
+
+            <div class="admin-tools">
+                <input type="search" id="searchBox" placeholder="ابحث بالاسم أو البريد أو الهاتف أو الجامعة...">
+                <select id="typeFilter"><option value="">كل أنواع الانضمام</option></select>
+                <select id="cityFilter"><option value="">كل المدن</option></select>
+            </div>
+
+            <div class="table-wrap">
+                <table class="reg-table" id="regTable">
+                    <thead><tr>
+                        <th>#</th><th>التاريخ</th><th>الاسم</th><th>نوع الانضمام</th><th>البريد</th>
+                        <th>الهاتف</th><th>المدينة</th><th>الجامعة / المؤسسة</th><th>التخصص</th><th>الرسالة</th><th></th>
+                    </tr></thead>
+                    <tbody id="regBody"></tbody>
+                </table>
+                <div class="empty-state" id="emptyState">لا يوجد منتسبون بعد.</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container footer-content">
+        <a href="#" class="footer-logo">
+            <img src="Ai_VXL_club_Logo_-removebg-preview.png" />
+            AI VXL Club
+        </a>
+        <div class="footer-links">
+            <a href="#about">من نحن</a>
+                                                <a href="#join">انضم معنا</a>
+            <a href="#partner">كن شريكاً</a>
+        </div>
+        <div>
+            <div style="margin-bottom:6px;"><button class="admin-link" id="openAdmin">لوحة الإدارة</button></div>
+                <div class="copyright">© 2026 AI VXL Club — مبادرة تعليمية أردنية</div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    0772916514
+                </div>
+                <div class="contact-item">
+                    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    sosooaoa460@gmail.com
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+/* =======================================================================
+   AI VXL Club — إعدادات قاعدة البيانات
+   -----------------------------------------------------------------------
+   ضع هنا رابط تطبيق Google Apps Script بعد نشره (شرح كامل في README).
+   مثال: https://script.google.com/macros/s/AKfycbx....../exec
+   إذا تركته فارغاً، سيعمل الموقع بوضع تجريبي ويحفظ الطلبات في المتصفح فقط.
+   ======================================================================= */
+const CONFIG = {
+  ENDPOINT: "https://script.google.com/macros/s/AKfycbzBJwf7u7gcBYXwKJhskAafdMDrMyEqAqDVipB9lyzvXbzVJMSsbvQG4-3K1aBgNYZvcA/exec",
+  CLUB_NAME: "AI VXL Club"
+};
+/* ===================================================================== */
+
+(function () {
+  "use strict";
+
+  /* ---------- Reveal on scroll ---------- */
+  var els = document.querySelectorAll('[data-aos]');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          var d = parseInt(en.target.getAttribute('data-aos-delay') || '0', 10);
+          setTimeout(function () { en.target.classList.add('is-visible'); }, d);
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(function (el) { io.observe(el); });
+  } else {
+    els.forEach(function (el) { el.classList.add('is-visible'); });
+  }
+
+  /* ---------- Preloader ---------- */
+  window.addEventListener('load', function () {
+    var p = document.querySelector('.preloader');
+    if (!p) return;
+    setTimeout(function () {
+      p.classList.add('fade-out');
+      setTimeout(function () { p.style.display = 'none'; }, 500);
+    }, 600);
+  });
+
+  /* ---------- Sticky header ---------- */
+  var header = document.querySelector('.sticky-header');
+  window.addEventListener('scroll', function () {
+    if (header) header.classList.toggle('scrolled', window.scrollY > 100);
+  }, { passive: true });
+
+  /* ---------- Mobile menu ---------- */
+  var menuToggle = document.querySelector('.menu-toggle');
+  var navLinks = document.querySelector('.nav-links');
+  var hamburger = document.querySelector('.hamburger');
+  if (menuToggle) menuToggle.addEventListener('click', function () {
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('active');
+  });
+
+  /* ---------- Smooth scroll ---------- */
+  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var id = this.getAttribute('href');
+      if (!id || id === '#') return;
+      var target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+      if (navLinks && navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('active');
+      }
+    });
+  });
+
+  /* =====================================================================
+     التخزين: Google Sheets عبر Apps Script، أو المتصفح كوضع تجريبي
+     ===================================================================== */
+  var LOCAL_KEY = 'aivxl_registrations';
+  CONFIG.ENDPOINT = (CONFIG.ENDPOINT || "").trim();
+  var hasEndpoint = /^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(CONFIG.ENDPOINT);
+
+  function localRows() {
+    try { return JSON.parse(localStorage.getItem(LOCAL_KEY) || '[]'); } catch (e) { return []; }
+  }
+  function localSave(rows) {
+    try { localStorage.setItem(LOCAL_KEY, JSON.stringify(rows)); } catch (e) {}
+  }
+
+  function sendRegistration(payload) {
+    if (!hasEndpoint) {
+      return new Promise(function (resolve) {
+        setTimeout(function () {
+          var rows = localRows();
+          payload.id = 'local-' + Date.now();
+          payload.timestamp = new Date().toISOString();
+          rows.push(payload);
+          localSave(rows);
+          resolve({ ok: true, local: true });
+        }, 600);
+      });
+    }
+    // Content-Type نصي لتفادي طلب preflight مع Google Apps Script
+    return fetch(CONFIG.ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(Object.assign({ action: 'create' }, payload))
+    }).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    });
+  }
+
+  function fetchRegistrations(key) {
+    if (!hasEndpoint) {
+      return Promise.resolve({ ok: true, rows: localRows().slice().reverse(), local: true });
+    }
+    var url = CONFIG.ENDPOINT + '?action=list&key=' + encodeURIComponent(key);
+    return fetch(url).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    });
+  }
+
+  function deleteRegistration(key, id) {
+    if (!hasEndpoint) {
+      var rows = localRows().filter(function (r) { return r.id !== id; });
+      localSave(rows);
+      return Promise.resolve({ ok: true });
+    }
+    var url = CONFIG.ENDPOINT + '?action=delete&key=' + encodeURIComponent(key) + '&id=' + encodeURIComponent(id);
+    return fetch(url).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    });
+  }
+
+  /* =====================================================================
+     الفورم
+     ===================================================================== */
+  var form = document.getElementById('joinForm');
+  var statusBox = document.getElementById('formStatus');
+  var submitBtn = document.getElementById('submitBtn');
+
+  function showError(inputId, show) {
+    var box = document.querySelector('.field-error[data-for="' + inputId + '"]');
+    if (box) box.classList.toggle('show', !!show);
+  }
+  function setStatus(type, msg) {
+    statusBox.className = 'form-status show ' + type;
+    statusBox.textContent = msg;
+  }
+
+  if (form) form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    statusBox.className = 'form-status';
+
+    var name = document.getElementById('f-name');
+    var email = document.getElementById('f-email');
+    var phone = document.getElementById('f-phone');
+    var type = document.getElementById('f-type');
+    var hp = document.getElementById('f-hp');
+
+    var ok = true;
+    var nameOk = name.value.trim().length >= 3;
+    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim());
+    var digits = phone.value.replace(/\D/g, '');
+    var phoneOk = digits.length >= 9;
+    var typeOk = !!type.value;
+
+    showError('f-name', !nameOk); showError('f-email', !emailOk);
+    showError('f-phone', !phoneOk); showError('f-type', !typeOk);
+    ok = nameOk && emailOk && phoneOk && typeOk;
+
+    if (!ok) {
+      setStatus('err', 'يرجى تعبئة الحقول المطلوبة بشكل صحيح.');
+      var firstBad = form.querySelector('.field-error.show');
+      if (firstBad) firstBad.previousElementSibling.focus();
+      return;
+    }
+    if (hp.value) return; // bot
+
+    var payload = {
+      fullName: name.value.trim(),
+      email: email.value.trim(),
+      phone: phone.value.trim(),
+      city: document.getElementById('f-city').value,
+      organization: document.getElementById('f-org').value.trim(),
+      major: document.getElementById('f-major').value.trim(),
+      joinType: type.value,
+      message: document.getElementById('f-msg').value.trim(),
+      source: location.hostname || 'direct'
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'جارٍ الإرسال...';
+
+    sendRegistration(payload).then(function (res) {
+      if (res && res.ok) {
+        form.reset();
+        setStatus('ok', 'تم تسجيل طلبك بنجاح. سنتواصل معك على البريد أو الواتساب قريباً.'
+          + (res.local ? ' (وضع تجريبي: البيانات محفوظة في هذا المتصفح فقط — اربط قاعدة البيانات لتفعيل الحفظ الدائم.)' : ''));
+      } else {
+        setStatus('err', (res && res.error) || 'تعذّر إرسال الطلب. حاول مرة أخرى.');
+      }
+    }).catch(function () {
+      setStatus('err', 'تعذّر الاتصال بالخادم. تأكد من اتصالك بالإنترنت وحاول مرة أخرى.');
+    }).then(function () {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'إرسال الطلب';
+    });
+  });
+
+  /* =====================================================================
+     لوحة الإدارة
+     ===================================================================== */
+  var adminView = document.getElementById('adminView');
+  var gate = document.getElementById('adminGate');
+  var panel = document.getElementById('adminPanel');
+  var keyInput = document.getElementById('adminKey');
+  var gateErr = document.getElementById('gateErr');
+  var regBody = document.getElementById('regBody');
+  var emptyState = document.getElementById('emptyState');
+  var searchBox = document.getElementById('searchBox');
+  var typeFilter = document.getElementById('typeFilter');
+  var cityFilter = document.getElementById('cityFilter');
+  var statsRow = document.getElementById('statsRow');
+  var lastSync = document.getElementById('lastSync');
+  var allRows = [];
+  var adminKey = '';
+
+  function openAdmin() {
+    adminView.classList.add('open');
+    adminView.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('admin-open');
+    var saved = sessionStorage.getItem('aivxl_key');
+    if (saved || !hasEndpoint) { adminKey = saved || 'local'; unlock(); }
+    else { setTimeout(function () { keyInput.focus(); }, 60); }
+  }
+  function closeAdmin() {
+    adminView.classList.remove('open');
+    adminView.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('admin-open');
+    if (location.hash === '#admin') history.replaceState(null, '', location.pathname + location.search);
+  }
+  function unlock() {
+    gate.style.display = 'none';
+    panel.style.display = 'block';
+    load();
+  }
+
+  document.getElementById('openAdmin').addEventListener('click', openAdmin);
+  document.getElementById('gateClose').addEventListener('click', closeAdmin);
+  document.getElementById('btnClose').addEventListener('click', closeAdmin);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && adminView.classList.contains('open')) closeAdmin();
+  });
+  if (location.hash === '#admin') openAdmin();
+
+  document.getElementById('adminLogin').addEventListener('click', doLogin);
+  keyInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') doLogin(); });
+
+  function doLogin() {
+    var k = keyInput.value.trim();
+    if (!k) return;
+    gateErr.classList.remove('show');
+    fetchRegistrations(k).then(function (res) {
+      if (res && res.ok) {
+        adminKey = k;
+        sessionStorage.setItem('aivxl_key', k);
+        unlock();
+        render(res.rows || []);
+      } else {
+        gateErr.textContent = (res && res.error) || 'كلمة المرور غير صحيحة';
+        gateErr.classList.add('show');
+      }
+    }).catch(function () {
+      gateErr.textContent = 'تعذّر الاتصال بقاعدة البيانات. تأكد من رابط الـ ENDPOINT.';
+      gateErr.classList.add('show');
+    });
+  }
+
+  function load() {
+    regBody.innerHTML = '';
+    emptyState.style.display = 'block';
+    emptyState.textContent = 'جارٍ تحميل البيانات...';
+    fetchRegistrations(adminKey).then(function (res) {
+      if (res && res.ok) render(res.rows || []);
+      else {
+        sessionStorage.removeItem('aivxl_key');
+        emptyState.textContent = (res && res.error) || 'تعذّر تحميل البيانات.';
+      }
+    }).catch(function () {
+      emptyState.textContent = 'تعذّر الاتصال بقاعدة البيانات.';
+    });
+  }
+  document.getElementById('btnRefresh').addEventListener('click', load);
+
+  function render(rows) {
+    allRows = rows;
+    lastSync.textContent = 'آخر تحديث: ' + new Date().toLocaleString('ar-JO')
+      + (hasEndpoint ? '' : ' — وضع تجريبي (بيانات هذا المتصفح فقط)');
+    fillFilter(typeFilter, rows.map(function (r) { return r.joinType; }), 'كل أنواع الانضمام');
+    fillFilter(cityFilter, rows.map(function (r) { return r.city; }), 'كل المدن');
+    drawStats(rows);
+    drawTable();
+  }
+
+  function fillFilter(sel, values, allLabel) {
+    var cur = sel.value;
+    var uniq = values.filter(function (v) { return v; }).filter(function (v, i, a) { return a.indexOf(v) === i; }).sort();
+    sel.innerHTML = '<option value="">' + allLabel + '</option>';
+    uniq.forEach(function (v) {
+      var o = document.createElement('option'); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (uniq.indexOf(cur) > -1) sel.value = cur;
+  }
+
+  function drawStats(rows) {
+    var today = new Date().toDateString();
+    var todayCount = rows.filter(function (r) {
+      return r.timestamp && new Date(r.timestamp).toDateString() === today;
+    }).length;
+    var vol = rows.filter(function (r) { return (r.joinType || '').indexOf('متطوع') === 0; }).length;
+    var partners = rows.length - vol;
+    var cards = [
+      { n: rows.length, l: 'إجمالي الطلبات' },
+      { n: vol, l: 'متطوعون' },
+      { n: partners, l: 'شركاء وداعمون' },
+      { n: todayCount, l: 'طلبات اليوم' }
+    ];
+    statsRow.innerHTML = cards.map(function (c) {
+      return '<div class="stat-box"><div class="num">' + c.n + '</div><div class="lbl">' + c.l + '</div></div>';
+    }).join('');
+  }
+
+  function tagClass(t) {
+    t = t || '';
+    if (t.indexOf('شريك تقني') === 0) return 't';
+    if (t.indexOf('شريك') === 0) return 'p';
+    if (t.indexOf('داعم') === 0) return 'd';
+    return '';
+  }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+    });
+  }
+  function fmtDate(v) {
+    if (!v) return '—';
+    var d = new Date(v);
+    return isNaN(d) ? String(v) : d.toLocaleDateString('ar-JO') + ' ' + d.toLocaleTimeString('ar-JO', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function filtered() {
+    var q = (searchBox.value || '').trim().toLowerCase();
+    var t = typeFilter.value, c = cityFilter.value;
+    return allRows.filter(function (r) {
+      if (t && r.joinType !== t) return false;
+      if (c && r.city !== c) return false;
+      if (!q) return true;
+      return [r.fullName, r.email, r.phone, r.organization, r.major, r.message]
+        .join(' ').toLowerCase().indexOf(q) > -1;
+    });
+  }
+
+  function drawTable() {
+    var rows = filtered();
+    emptyState.style.display = rows.length ? 'none' : 'block';
+    if (!rows.length) emptyState.textContent = allRows.length ? 'لا توجد نتائج مطابقة للبحث.' : 'لا يوجد منتسبون بعد.';
+    regBody.innerHTML = rows.map(function (r, i) {
+      return '<tr>'
+        + '<td>' + (i + 1) + '</td>'
+        + '<td style="white-space:nowrap">' + esc(fmtDate(r.timestamp)) + '</td>'
+        + '<td style="font-weight:700">' + esc(r.fullName) + '</td>'
+        + '<td><span class="tag ' + tagClass(r.joinType) + '">' + esc(r.joinType) + '</span></td>'
+        + '<td><a href="mailto:' + esc(r.email) + '">' + esc(r.email) + '</a></td>'
+        + '<td><a href="tel:' + esc(r.phone) + '" style="white-space:nowrap">' + esc(r.phone) + '</a></td>'
+        + '<td>' + esc(r.city || '—') + '</td>'
+        + '<td>' + esc(r.organization || '—') + '</td>'
+        + '<td>' + esc(r.major || '—') + '</td>'
+        + '<td style="max-width:260px">' + esc(r.message || '—') + '</td>'
+        + '<td><button class="row-del" data-id="' + esc(r.id) + '">حذف</button></td>'
+        + '</tr>';
+    }).join('');
+  }
+
+  searchBox.addEventListener('input', drawTable);
+  typeFilter.addEventListener('change', drawTable);
+  cityFilter.addEventListener('change', drawTable);
+
+  regBody.addEventListener('click', function (e) {
+    var btn = e.target.closest('.row-del');
+    if (!btn) return;
+    if (!confirm('حذف هذا الطلب نهائياً؟')) return;
+    var id = btn.getAttribute('data-id');
+    btn.disabled = true; btn.textContent = '...';
+    deleteRegistration(adminKey, id).then(function (res) {
+      if (res && res.ok) load();
+      else { btn.disabled = false; btn.textContent = 'حذف'; alert((res && res.error) || 'تعذّر الحذف'); }
+    }).catch(function () { btn.disabled = false; btn.textContent = 'حذف'; });
+  });
+
+  /* ---------- تصدير CSV ---------- */
+  document.getElementById('btnExport').addEventListener('click', function () {
+    var rows = filtered();
+    if (!rows.length) { alert('لا توجد بيانات للتصدير.'); return; }
+    var head = ['التاريخ', 'الاسم الكامل', 'نوع الانضمام', 'البريد الإلكتروني', 'رقم الهاتف', 'المدينة', 'الجامعة / المؤسسة', 'التخصص', 'الرسالة'];
+    var lines = [head].concat(rows.map(function (r) {
+      return [fmtDate(r.timestamp), r.fullName, r.joinType, r.email, r.phone, r.city, r.organization, r.major, r.message];
+    })).map(function (arr) {
+      return arr.map(function (v) { return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; }).join(',');
+    }).join('\r\n');
+    var blob = new Blob(['\uFEFF' + lines], { type: 'text/csv;charset=utf-8;' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'AI-VXL-Club-registrations-' + new Date().toISOString().slice(0, 10) + '.csv';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+  });
+
+})();
+</script>
+
+</body>
+</html>
