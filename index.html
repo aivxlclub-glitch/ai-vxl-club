@@ -5,41 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI VXL Club | بناء المستقبل</title>
     <meta name="description" content="AI VXL Club هي مبادرة تعليمية أردنية يقوم فيها طلاب الجامعات بتدريس طلاب المدارس مهارات الذكاء الاصطناعي والبرمجة." />
-    <link rel="icon" type="image/png" href="c04811de-dff8-46f7-b5ef-2eae379fc6b8.png">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --primary: #2563eb;
-            --secondary: #06b6d4;
-            --accent: #3b82f6;
-            --blue: #2563eb;
-            --cyan: #06b6d4;
-            --light-bg: #f0f4ff;
-            --dark-bg: #0a1f44;
+            --primary: #4B3FA0;
+            --secondary: #F2A93B;
+            --accent: #6B5CD1;
+            --blue: #4B3FA0;
+            --blue2:#80a2ea;
+            --cyan: #F2A93B;
+            --light-bg: #F4F2FB;
+            --dark-bg: #17143D;
             --white: #ffffff;
-            --gray: #64748b;
-            --navy: #0a1f44;
-            --glass-bg: rgba(255, 255, 255, 0.7);
-            --glass-border: rgba(37, 99, 235, 0.15);
-            --gradient: linear-gradient(135deg, #0a1f44, #1e3a8a, #2563eb, #06b6d4);
+            --gray: #6b6580;
+            --navy: #17143D;
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(75, 63, 160, 0.16);
+            --gradient: linear-gradient(135deg, #6880aa, #3257be, #2563eb, #07cef1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Inter', 'Space Grotesk', sans-serif;
+            font-family: 'Tajawal', sans-serif;
             background: var(--light-bg);
             color: var(--navy);
-            line-height: 1.7;
+            line-height: 1.8;
             overflow-x: hidden;
         }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.03em; line-height: 1.2; }
+        h1, h2, h3, h4 { font-family: 'Cairo', sans-serif; font-weight: 800; line-height: 1.25; }
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
         /* ===== PRELOADER ===== */
@@ -115,7 +116,7 @@
 
         .nav-link {
             text-decoration: none;
-            color: var(--gray);
+            color: var(--white);
             font-weight: 600;
             font-size: 0.95rem;
             position: relative;
@@ -125,6 +126,7 @@
 
         .nav-link::after {
             content: '';
+            color: var(--white);
             position: absolute;
             bottom: 0; left: 0;
             width: 0; height: 2px;
@@ -205,7 +207,7 @@
             margin: 0 auto;
         }
 
-        /* ===== HERO ===== */
+        /* ===== HERO (خلفية صورة + طبقة تعتيم) ===== */
         #hero {
             min-height: 100vh;
             padding: 160px 0 100px;
@@ -215,20 +217,42 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            background: 
-                radial-gradient(circle at 15% 20%, rgba(37, 99, 235, 0.1), transparent 40%),
-                radial-gradient(circle at 85% 80%, rgba(6, 182, 212, 0.1), transparent 40%),
-                var(--light-bg);
+            background-image:
+                linear-gradient(180deg, rgba(10,31,68,0.75), rgba(10,31,68,0.85)),
+                url("Gemini_Generated_Image_sbsj9msbsj9msbsj (1).jfif");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
-        /* ===== خلفية تكنولوجية (خلايا) ===== */
+        /* نص أبيض فوق الصورة عشان يضل مقروء */
+        #hero .hero-badge {
+            background: rgba(255,255,255,0.95);
+        }
+        #hero .hero-title {
+            color: #ffffff;
+        }
+        #hero .hero-title .highlight {
+            color: var(--blue2);
+        }
+        #hero .hero-quote {
+            color: rgba(255,255,255,0.85);
+        }
+        #hero .hero-quote strong {
+            color: #ffffff;
+        }
+        #hero .hero-logo-circle {
+            background: white;
+        }
+
+        /* ===== خلفية تكنولوجية (خلايا) فوق الصورة بشفافية خفيفة ===== */
         #hero::before {
             content: '';
             position: absolute;
             inset: 0;
             background-image: 
-                linear-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
             background-size: 50px 50px;
             z-index: 0;
             animation: gridMove 20s linear infinite;
@@ -361,16 +385,10 @@
             50% { transform: scale(2); opacity: 0; }
         }
 
-        .hero-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-            color: var(--navy);
-            line-height: 1.3;
-            margin-top: 20px;
-        }
+
 
         .hero-title .highlight {
-            color: var(--blue);
+            color: var(--blue2);
             font-weight: 900;
         }
 
@@ -423,12 +441,18 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            color: var(--blue);
-            font-weight: 800;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 20px;
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 18px;
+            font-family: 'Cairo', sans-serif;
+        }
+        .section-label::before {
+            content: '';
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--secondary);
+            display: inline-block;
         }
 
         h2 {
@@ -750,7 +774,7 @@
         }
 
         .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
+            color: rgb(255, 255, 255);
         }
 
         .footer-links a:hover {
@@ -759,7 +783,7 @@
 
         .copyright {
             font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgb(255, 255, 255);
         }
 
         .contact-info {
@@ -910,6 +934,246 @@
         @media (max-width: 768px) {
             .admin-bar { flex-direction: column; align-items: stretch; text-align: center; }
         }
+
+        /* ============================================================
+           AI VXL Club — طبقة التصميم الحديثة (إضافات فوق الأصل)
+           ============================================================ */
+
+        /* ---------- 1) SCROLL PROGRESS BAR ---------- */
+        .scroll-progress {
+            position: fixed; top: 0; right: 0; left: 0;
+            height: 4px; z-index: 9998;
+            background: linear-gradient(90deg, var(--secondary), var(--accent), var(--primary));
+            background-size: 200% 100%;
+            width: 0%;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 12px rgba(242, 169, 59, 0.6);
+            animation: shimmerBar 3s linear infinite;
+        }
+        @keyframes shimmerBar {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        /* ---------- 2) CURSOR GLOW ---------- */
+        .cursor-glow {
+            position: fixed; width: 400px; height: 400px;
+            border-radius: 50%; pointer-events: none;
+            background: radial-gradient(circle, rgba(107, 92, 209, 0.15), transparent 65%);
+            transform: translate(-50%, -50%);
+            z-index: 1; opacity: 0;
+            transition: opacity 0.4s ease;
+            mix-blend-mode: multiply;
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .cursor-glow { opacity: 1; }
+        }
+
+        /* ---------- 3) BACKGROUND PARTICLES ---------- */
+        .particles-bg {
+            position: fixed; inset: 0; z-index: 0;
+            pointer-events: none; opacity: .9;
+        }
+        .particles-bg canvas { width: 100%; height: 100%; display: block; }
+
+        /* ---------- 4) ANIMATED BLOBS ---------- */
+        .blob-wrap {
+            position: absolute; inset: 0; overflow: hidden;
+            pointer-events: none; z-index: 0;
+        }
+        .blob {
+            position: absolute; border-radius: 50%;
+            filter: blur(70px); opacity: 0.45;
+            animation: blobFloat 18s ease-in-out infinite;
+        }
+        .blob-1 {
+            width: 420px; height: 420px;
+            background: radial-gradient(circle, #6B5CD1, transparent 70%);
+            top: 10%; right: -120px;
+        }
+        .blob-2 {
+            width: 360px; height: 360px;
+            background: radial-gradient(circle, #F2A93B, transparent 70%);
+            bottom: 5%; left: -100px;
+            animation-delay: -6s;
+        }
+        .blob-3 {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, #4B3FA0, transparent 70%);
+            top: 45%; left: 40%;
+            animation-delay: -12s;
+        }
+        @keyframes blobFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(40px, -30px) scale(1.1); }
+            66% { transform: translate(-30px, 40px) scale(0.95); }
+        }
+
+        /* ---------- 5) HERO GLOW على الشعار ---------- */
+        .hero-logo-circle {
+            animation: logoGlow 4s ease-in-out infinite;
+        }
+        @keyframes logoGlow {
+            0%, 100% { box-shadow: 0 10px 40px rgba(10,31,68,0.1), 0 0 0 0 rgba(242,169,59,0.3); }
+            50% { box-shadow: 0 10px 50px rgba(10,31,68,0.15), 0 0 0 22px rgba(242,169,59,0); }
+        }
+
+        /* ---------- 7) BUTTON SHINE ---------- */
+        .btn-primary, .form-submit {
+            position: relative; overflow: hidden;
+            isolation: isolate;
+        }
+        .btn-primary::after, .form-submit::after {
+            content: ''; position: absolute;
+            top: 0; inset-inline-start: -120%;
+            width: 60%; height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
+            transform: skewX(-20deg);
+            transition: inset-inline-start 0.7s ease;
+            z-index: -1;
+        }
+        .btn-primary:hover::after, .form-submit:hover::after {
+            inset-inline-start: 130%;
+        }
+
+        /* ---------- 8) CARD TILT 3D ---------- */
+        .card, .tool-card, .partner-card {
+            transform-style: preserve-3d;
+            will-change: transform;
+            transition: transform 0.25s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+        .card-icon, .tool-icon, .partner-card-icon {
+            transition: transform 0.35s ease;
+        }
+        .card:hover .card-icon,
+        .tool-card:hover .tool-icon,
+        .partner-card:hover .partner-card-icon {
+            transform: translateZ(30px) rotate(-6deg) scale(1.08);
+        }
+
+        /* ---------- 9) BACK TO TOP ---------- */
+        .back-to-top {
+            position: fixed; bottom: 30px; inset-inline-start: 30px;
+            width: 54px; height: 54px; border-radius: 50%;
+            background: var(--navy); color: #fff;
+            border: none; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 10px 30px rgba(10,31,68,0.35);
+            opacity: 0; visibility: hidden; transform: translateY(20px);
+            transition: all 0.4s ease; z-index: 900;
+        }
+        .back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        .back-to-top:hover { background: var(--secondary); transform: translateY(-4px); }
+        .back-to-top svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+
+        /* ---------- 10) NOISE TEXTURE ---------- */
+        body::before {
+            content: ''; position: fixed; inset: 0;
+            pointer-events: none; z-index: 9997;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* ---------- 11) SECTION LABEL PULSE ---------- */
+        .section-label::before {
+            box-shadow: 0 0 0 0 rgba(242,169,59,0.6);
+            animation: labelPulse 2.4s ease-out infinite;
+        }
+        @keyframes labelPulse {
+            0% { box-shadow: 0 0 0 0 rgba(242,169,59,0.6); }
+            100% { box-shadow: 0 0 0 14px rgba(242,169,59,0); }
+        }
+
+        /* ---------- 12) FORM FOCUS GLOW ---------- */
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(75,63,160,0.12), 0 0 0 4px rgba(75,63,160,0.08);
+        }
+
+        /* ---------- 13) قسم TOOLS خلفية متحركة ---------- */
+        section[style*="background: white"] {
+            background-image:
+                radial-gradient(circle at 15% 20%, rgba(107,92,209,0.06), transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(242,169,59,0.06), transparent 40%);
+        }
+
+        /* ---------- 14) تحسين الأداء على الجوال ---------- */
+        @media (max-width: 768px) {
+            .cursor-glow, .particles-bg { display: none; }
+            .blob { filter: blur(50px); opacity: 0.3; }
+            .back-to-top { bottom: 20px; inset-inline-start: 20px; width: 46px; height: 46px; }
+        }
+
+        /* ---------- 15) احترام تفضيلات المستخدم ---------- */
+        @media (prefers-reduced-motion: reduce) {
+            .blob, .scroll-progress, .hero-logo-circle,
+            .section-label::before {
+                animation: none !important;
+            }
+            .particles-bg, .cursor-glow { display: none !important; }
+        }
+                /* ============================================================
+           تصميم العنوان الرئيسي — منقول من النسخة القديمة
+           ============================================================ */
+
+        .hero-title {
+            font-size: clamp(2rem, 4vw, 4rem);
+            font-weight: 700;
+            color: var(--navy);
+            line-height: 1.3;
+            margin-top: 20px;
+            font-family: 'Cairo', sans-serif;
+            letter-spacing: normal;
+        }
+
+        .hero-title .highlight {
+            color: var(--blue2);
+            font-weight:700;
+        }
+
+        .hero-title .gradient-text {
+            background: var(--gradient);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease infinite;
+            font-weight: 700;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* تحسين الخط العربي للعناوين */
+        h1, h2, h3, h4 {
+            font-family: 'Cairo', 'Space Grotesk', sans-serif;
+            font-weight: 800;
+            line-height: 1.3;
+            letter-spacing: normal;
+        }
+
+        /* تحسين النصوص العربية */
+        body {
+            font-family: 'Tajawal', 'Inter', sans-serif;
+            line-height: 1.8;
+        }
+
+        /* ===== ضبط الأقسام والعناوين الثانوية ===== */
+        .hero-quote {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .hero-quote strong {
+            color: var(--navy);
+        }
     </style>
 </head>
 
@@ -918,15 +1182,20 @@
 <!-- PRELOADER -->
 <div class="preloader">
     <div class="loader-logo">
-        <img src="Ai_VXL_club_Logo_-removebg-preview.png" />
+        <img src="Gemini_Generated_Image_ote058ote058ote0-removebg-preview.png" />
     </div>
 </div>
+
+<!-- طبقات التصميم الحديثة -->
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+<div class="particles-bg"><canvas id="particlesCanvas"></canvas></div>
 
 <!-- STICKY HEADER -->
 <header class="sticky-header">
     <nav>
       <a href="#" class="logo">
-    <img src="Ai_VXL_club_Logo_-removebg-preview.png"
+    <img src="Gemini_Generated_Image_ote058ote058ote0-removebg-preview.png"
          alt="AI VXL Club Logo"
          class="logo-img" />
 </a>
@@ -951,6 +1220,11 @@
 
 <!-- HERO -->
 <section id="hero">
+    <div class="blob-wrap">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
     <div class="container">
         <div class="hero-content" data-aos="fade-up">
             <!-- الشعار داخل دائرة تكنولوجية -->
@@ -963,12 +1237,6 @@
                     <span></span>
                 </div>
                 <img src="Ai_VXL_club_Logo_-removebg-preview.png" />
-            </div>
-
-            <!-- البادج -->
-            <div class="hero-badge" data-aos="fade-up" data-aos-delay="100">
-                <span class="dot"></span>
-                مبادرة تعليمية أردنية (EdTech)
             </div>
 
             <!-- الجملة الرئيسية -->
@@ -1007,7 +1275,7 @@
 <!-- ABOUT -->
 <section id="about">
     <div class="container section-center">
-        <div class="section-label" data-aos="fade-up">01 — من نحن</div>
+        <div class="section-label" data-aos="fade-up">من نحن</div>
         <h2 data-aos="fade-up">ما هو <span class="gradient-text">AI VXL Club</span>؟</h2>
         <p class="lead" data-aos="fade-up">
             AI VXL Club هي مبادرة تعليمية أردنية تهدف إلى سد الفجوة المعرفية بين المدرسة والجامعة. يقوم طلاب الجامعات المتطوعون بتدريس طلاب المدارس مهارات الذكاء الاصطناعي والبرمجة والتفكير الابتكاري داخل أندية مدرسية.
@@ -1060,7 +1328,7 @@
 <!-- TOOLS -->
 <section style="background: white;">
     <div class="container section-center">
-        <div class="section-label" data-aos="fade-up">02 — توظيف ما هو موجود أصلاً</div>
+        <div class="section-label" data-aos="fade-up">كيف نعمل</div>
         <h2 data-aos="fade-up">أذكياء في استخدام الموارد، <span class="gradient-text">جاهزون للتوسع</span></h2>
         <p class="lead" data-aos="fade-up">نستفيد من المتاح بذكاء اليوم، ونصمم برامجنا لتكون قابلة للارتقاء مع أي تجهيزات أو تقنيات حديثة يقدمها شركاؤنا في المستقبل.</p>
 
@@ -1188,7 +1456,7 @@
 <!-- PARTNER -->
 <section id="partner">
     <div class="container section-center">
-        <div class="section-label" data-aos="fade-up">03 — كن شريكًا معنا</div>
+        <div class="section-label" data-aos="fade-up">كن شريكًا معنا</div>
         <h2 data-aos="fade-up">شاركنا بناء <span class="gradient-text">مستقبل التعليم</span></h2>
         <p class="lead" data-aos="fade-up">
             هل أنت مدرسة، مؤسسة تعليمية، أو شركة تكنولوجيا؟ ندعوك لتكون شريكاً معنا في تمكين الطلاب من مهارات الذكاء الاصطناعي.
@@ -1290,7 +1558,7 @@
 <footer>
     <div class="container footer-content">
         <a href="#" class="footer-logo">
-            <img src="Ai_VXL_club_Logo_-removebg-preview.png" />
+            <img src="Gemini_Generated_Image_ote058ote058ote0-removebg-preview.png" />
             AI VXL Club
         </a>
         <div class="footer-links">
@@ -1314,6 +1582,13 @@
         </div>
     </div>
 </footer>
+
+<!-- زر العودة للأعلى -->
+<button class="back-to-top" id="backToTop" aria-label="العودة للأعلى">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+</button>
 
 <script>
 /* =======================================================================
@@ -1735,6 +2010,119 @@ const CONFIG = {
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
   });
+
+  /* =====================================================================
+     طبقات التصميم الحديثة — إضافات تفاعلية
+     ===================================================================== */
+
+  /* ---------- Scroll Progress ---------- */
+  var progressBar = document.getElementById('scrollProgress');
+  function updateProgress() {
+    var h = document.documentElement;
+    var scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    if (progressBar) progressBar.style.width = scrolled + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  /* ---------- Cursor Glow ---------- */
+  var cursorGlow = document.getElementById('cursorGlow');
+  var mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.addEventListener('mousemove', function (e) {
+      mouseX = e.clientX; mouseY = e.clientY;
+    });
+    (function animateGlow() {
+      glowX += (mouseX - glowX) * 0.12;
+      glowY += (mouseY - glowY) * 0.12;
+      if (cursorGlow) {
+        cursorGlow.style.left = glowX + 'px';
+        cursorGlow.style.top = glowY + 'px';
+      }
+      requestAnimationFrame(animateGlow);
+    })();
+  }
+
+  /* ---------- Particles Network ---------- */
+  var canvas = document.getElementById('particlesCanvas');
+  if (canvas && !window.matchMedia('(max-width: 768px)').matches) {
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var count = Math.min(60, Math.floor(window.innerWidth / 25));
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    for (var i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 1.8 + 0.8
+      });
+    }
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (var i = 0; i < particles.length; i++) {
+        for (var j = i + 1; j < particles.length; j++) {
+          var dx = particles[i].x - particles[j].x;
+          var dy = particles[i].y - particles[j].y;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 140) {
+            ctx.strokeStyle = 'rgba(75, 63, 160, ' + (0.15 * (1 - dist / 140)) + ')';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      particles.forEach(function (p) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+        ctx.fillStyle = 'rgba(242, 169, 59, 0.55)';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+  }
+
+  /* ---------- Back to Top ---------- */
+  var backBtn = document.getElementById('backToTop');
+  if (backBtn) {
+    window.addEventListener('scroll', function () {
+      backBtn.classList.toggle('show', window.scrollY > 500);
+    }, { passive: true });
+    backBtn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  /* ---------- Card Tilt 3D ---------- */
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('.card, .tool-card, .partner-card').forEach(function (card) {
+      card.addEventListener('mousemove', function (e) {
+        var rect = card.getBoundingClientRect();
+        var x = e.clientX - rect.left;
+        var y = e.clientY - rect.top;
+        var rx = ((y - rect.height / 2) / rect.height) * -8;
+        var ry = ((x - rect.width / 2) / rect.width) * 8;
+        card.style.transform = 'perspective(900px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-8px)';
+      });
+      card.addEventListener('mouseleave', function () {
+        card.style.transform = '';
+      });
+    });
+  }
 
 })();
 </script>
