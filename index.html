@@ -1197,6 +1197,41 @@
         min-height: 100svh;
     }
 }
+        /* ===== منع التمرير الأفقي نهائياً ===== */
+html, body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+/* ===== ضمان تجاوب جميع العناصر ===== */
+img, video, iframe, svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ===== تحسين الـ Hero على الجوال ===== */
+@media (max-width: 768px) {
+    #hero {
+        min-height: 100svh;
+        padding: 120px 15px 60px;
+    }
+    .hero-logo-circle {
+        width: 140px !important;
+        height: 140px !important;
+    }
+    .hero-logo-circle img {
+        width: 90px !important;
+    }
+    .hero-title {
+        font-size: 1.6rem !important;
+    }
+    .hero-quote {
+        font-size: 1rem !important;
+    }
+    .container {
+        padding: 0 15px !important;
+    }
+}
     </style>
 </head>
 
