@@ -213,23 +213,33 @@
         }
 
         /* ===== HERO (خلفية صورة + طبقة تعتيم) ===== */
-        #hero {
-            min-height: 100vh;
-            padding: 160px 0 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            background-image:
-                linear-gradient(180deg, rgba(10,31,68,0.75), rgba(10,31,68,0.85)),
-                url("Gemini_Generated_Image_sbsj9msbsj9msbsj (1).jpg");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
+        /* ===== خلفية الكمبيوتر (الصورة الحالية) ===== */
+#hero {
+    min-height: 100vh;
+    padding: 160px 0 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background-image:
+        linear-gradient(180deg, rgba(10,31,68,0.75), rgba(10,31,68,0.85)),
+        url("Gemini_Generated_Image_sbsj9msbsj9msbsj (1).jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
+/* ===== خلفية الهاتف (الصورة الجديدة) ===== */
+@media (max-width: 768px) {
+    #hero {
+        background-image:
+            linear-gradient(180deg, rgba(10,31,68,0.75), rgba(10,31,68,0.85)),
+            url("Gemini_Generated_Image_nbia3dnbia3dnbia.jpg"); /* <-- ضع هنا اسم صورة الهاتف */
+        background-position: center top; /* تعديل بسيط لضبط القص */
+    }
+}
         /* نص أبيض فوق الصورة عشان يضل مقروء */
         #hero .hero-badge {
             background: rgba(255,255,255,0.95);
