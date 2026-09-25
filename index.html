@@ -1179,6 +1179,23 @@
         .hero-quote strong {
             color: var(--navy);
         }
+        /* ===== MOBILE SAFETY FIX ===== */
+@media (max-width: 768px) {
+    [data-aos] {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .hero-content {
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
+    }
+
+    #hero {
+        min-height: 100svh;
+    }
+}
     </style>
 </head>
 
@@ -1630,14 +1647,20 @@ const CONFIG = {
   }
 
   /* ---------- Preloader ---------- */
-  window.addEventListener('load', function () {
+function hidePreloader() {
     var p = document.querySelector('.preloader');
     if (!p) return;
+
+    p.classList.add('fade-out');
+
     setTimeout(function () {
-      p.classList.add('fade-out');
-      setTimeout(function () { p.style.display = 'none'; }, 500);
-    }, 600);
-  });
+        p.style.display = 'none';
+    }, 500);
+}
+
+window.addEventListener('load', hidePreloader);
+
+setTimeout(hidePreloader, 3000);
 
   /* ---------- Sticky header ---------- */
   var header = document.querySelector('.sticky-header');
