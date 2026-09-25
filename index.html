@@ -843,9 +843,11 @@
 }
 
             .menu-toggle {
-                display: flex;
-            }
-
+    display: none !important;
+}
+.nav-links {
+    display: none !important;
+}
             .hero-title {
                 font-size: 2rem;
             }
@@ -1107,8 +1109,9 @@
 
         /* ---------- 14) تحسين الأداء على الجوال ---------- */
         @media (max-width: 768px) {
-            .cursor-glow, .particles-bg { display: none; }
-            .blob { filter: blur(50px); opacity: 0.3; }
+            .cursor-glow { display: none; } /* نترك هذا مخفياً لأنه خاص بالماوس */
+            .particles-bg { display: block; } /* إظهار الجسيمات */
+            .blob { filter: blur(50px); opacity: 0.5; } /* زيادة وضوح الفقاعات */
             .back-to-top { bottom: 20px; inset-inline-start: 20px; width: 46px; height: 46px; }
         }
 
@@ -2103,7 +2106,7 @@ const CONFIG = {
 
   /* ---------- Particles Network ---------- */
   var canvas = document.getElementById('particlesCanvas');
-  if (canvas && !window.matchMedia('(max-width: 768px)').matches) {
+if (canvas) {
     var ctx = canvas.getContext('2d');
     var particles = [];
     var count = Math.min(60, Math.floor(window.innerWidth / 25));
