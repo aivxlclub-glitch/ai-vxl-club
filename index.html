@@ -1455,7 +1455,7 @@ img, video, iframe, svg {
 
             <form id="joinForm" novalidate>
                 <div class="form-group">
-                    <label for="f-name">الاسم الكامل</label>
+                    <label for="f-name"> اسم الطالب او المدرسة او الجامعة او المؤسسة</label>
                     <input type="text" id="f-name" name="fullName" placeholder="اكتب اسمك هنا" required autocomplete="name">
                     <div class="field-error" data-for="f-name">هذا الحقل مطلوب</div>
                 </div>
@@ -1484,12 +1484,13 @@ img, video, iframe, svg {
                 </div>
 
                 <div class="form-group">
-                    <label for="f-org">الجامعة / المؤسسة</label>
-                    <input type="text" id="f-org" name="organization" placeholder="اسم الجامعة أو المؤسسة">
-                </div>
-
+                    <div class="form-group">
+    <label for="f-org">(اسم الجامعة (في حال كنت طالباً متطوعاً)</label>
+    <input type="text" id="f-org" name="organization" placeholder="اسم الجامعة أو المؤسسة">
+</div>
+                   
                 <div class="form-group">
-                    <label for="f-major">التخصص / المجال</label>
+                    <label for="f-major">التخصص / المجال (في حال كنت طالباً متطوعاً)</label>
                     <input type="text" id="f-major" name="major" placeholder="مثال: علوم الحاسوب، هندسة، ذكاء اصطناعي...">
                 </div>
 
