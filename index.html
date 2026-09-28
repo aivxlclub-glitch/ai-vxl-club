@@ -1483,17 +1483,15 @@ img, video, iframe, svg {
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <div class="form-group">
-    <label for="f-org">(اسم الجامعة (في حال كنت طالباً متطوعاً)</label>
+<div class="form-group">
+    <label for="f-org">f-org(في حال كنت طالباً متطوعاً)</label>
     <input type="text" id="f-org" name="organization" placeholder="اسم الجامعة أو المؤسسة">
     <div class="field-error" data-for="f-org">هذا الحقل مطلوب للطلاب المتطوعين</div>
 </div>
-                   
-                <div class="form-group">
-                    <label for="f-major">التخصص / المجال (في حال كنت طالباً متطوعاً)</label>
-                   <input type="text" id="f-org" name="organization" placeholder="الذكاء الاصطناعي , علم الحاسوب .....">
-                   <div class="field-error" data-for="f-org">هذا الحقل مطلوب للطلاب المتطوعين</div>
+
+<div class="form-group">
+    <label for="f-major">التخصص / المجال (في حال كنت طالباً متطوعاً)</label>
+    <input type="text" id="f-major" name="major" placeholder="الذكاء الاصطناعي، علم الحاسوب ...">
 </div>
 
                 <div class="form-group">
@@ -1826,6 +1824,7 @@ const CONFIG = {
     var email = document.getElementById('f-email');
     var phone = document.getElementById('f-phone');
     var orgInput = document.getElementById('f-org');
+    var type = document.getElementById('f-type'); 
     var hp = document.getElementById('f-hp');
 
    var ok = true;
