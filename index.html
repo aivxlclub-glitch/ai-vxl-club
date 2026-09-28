@@ -1487,12 +1487,14 @@ img, video, iframe, svg {
                     <div class="form-group">
     <label for="f-org">(اسم الجامعة (في حال كنت طالباً متطوعاً)</label>
     <input type="text" id="f-org" name="organization" placeholder="اسم الجامعة أو المؤسسة">
+    <div class="field-error" data-for="f-org">هذا الحقل مطلوب للطلاب المتطوعين</div>
 </div>
                    
                 <div class="form-group">
                     <label for="f-major">التخصص / المجال (في حال كنت طالباً متطوعاً)</label>
-                    <input type="text" id="f-major" name="major" placeholder="مثال: علوم الحاسوب، هندسة، ذكاء اصطناعي...">
-                </div>
+                   <input type="text" id="f-org" name="organization" placeholder="الذكاء الاصطناعي , علم الحاسوب .....">
+                   <div class="field-error" data-for="f-org">هذا الحقل مطلوب للطلاب المتطوعين</div>
+</div>
 
                 <div class="form-group">
                     <label for="f-type">نوع الانضمام</label>
@@ -1823,20 +1825,22 @@ const CONFIG = {
     var name = document.getElementById('f-name');
     var email = document.getElementById('f-email');
     var phone = document.getElementById('f-phone');
-    var type = document.getElementById('f-type');
+    var orgInput = document.getElementById('f-org');
     var hp = document.getElementById('f-hp');
 
-    var ok = true;
-    var nameOk = name.value.trim().length >= 3;
-    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim());
-    var digits = phone.value.replace(/\D/g, '');
-    var phoneOk = digits.length >= 9;
-    var typeOk = !!type.value;
+   var ok = true;
+   var nameOk = name.value.trim().length >= 3;
+   var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim());
+   var digits = phone.value.replace(/\D/g, '');
+   var phoneOk = digits.length >= 9;
+   var typeOk = !!type.value;
+   var orgOk = type.value !== 'متطوع (طالب جامعي)' || orgInput.value.trim().length >= 2;
 
-    showError('f-name', !nameOk); showError('f-email', !emailOk);
-    showError('f-phone', !phoneOk); showError('f-type', !typeOk);
-    ok = nameOk && emailOk && phoneOk && typeOk;
-
+   showError('f-name', !nameOk); showError('f-email', !emailOk);
+   showError('f-phone', !phoneOk); showError('f-type', !typeOk);
+   showError('f-org', !orgOk);
+   ok = nameOk && emailOk && phoneOk && typeOk && orgOk;
+      
     if (!ok) {
       setStatus('err', 'يرجى تعبئة الحقول المطلوبة بشكل صحيح.');
       var firstBad = form.querySelector('.field-error.show');
